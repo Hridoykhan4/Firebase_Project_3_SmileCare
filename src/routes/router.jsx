@@ -36,8 +36,16 @@ const router = createBrowserRouter([
         element: <Profile></Profile>,
       },
       {
-        path: "/details/:id",
+        path: "/details/:detailId",
         element: <Details></Details>,
+        loader: async ({ params }) => {
+          const res = await fetch(`/services.json`);
+          const data = await res.json();
+          const treatmentData = data.find(
+            (d) => d.id === parseInt(params.detailId)
+          );
+          return treatmentData;
+        },
       },
     ],
   },

@@ -18,9 +18,7 @@ const ServiceCard = ({ service }) => {
           <h2 className="text-2xl font-bold text-blue-700 mb-2">{treatment}</h2>
           <p title={description} className="text-gray-600 text-sm mb-4">
             {description.slice(0, 170)}...{" "}
-            <Link to={`/details/${id}`} className="text-red-500 text-sm link">
-              Read More
-            </Link>
+            <button className="text-red-500 text-sm link">Read More</button>
           </p>
 
           <div className="flex justify-between items-center text-sm text-gray-500">
@@ -39,7 +37,9 @@ const ServiceCard = ({ service }) => {
             </div>
           </div>
           <div className="pt-4 flex justify-end">
-            <button className="btn bg-sky-300 ">Checkout More</button>
+            <Link to={`/details/${id}`} className="btn bg-sky-300 ">
+              Checkout More
+            </Link>
           </div>
         </div>
       </div>
