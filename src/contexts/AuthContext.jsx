@@ -1,9 +1,5 @@
-const AuthContext = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+import { createContext } from "react";
+
+const AuthContext = createContext();
 
 export default AuthContext;

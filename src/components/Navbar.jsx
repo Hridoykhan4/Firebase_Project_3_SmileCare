@@ -87,9 +87,9 @@ const Navbar = () => {
 
       {/* Login Button */}
       <div className="navbar-end">
-        <a className="btn btn-primary px-6 rounded-full shadow-md hover:shadow-lg transition duration-300">
+        <NavLink to="/login" className="btn btn-primary px-6 rounded-full shadow-md hover:shadow-lg transition duration-300">
           Login
-        </a>
+        </NavLink>
       </div>
     </div>
   );

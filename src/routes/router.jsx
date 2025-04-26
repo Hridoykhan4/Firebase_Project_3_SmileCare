@@ -5,6 +5,8 @@ import AllTreatments from "../pages/AllTreatments";
 import MyAppointments from "../pages/MyAppointments";
 import Profile from "../pages/Profile";
 import Details from "../pages/Details";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile></Profile>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
       {
         path: "/details/:detailId",
