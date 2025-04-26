@@ -1,12 +1,17 @@
 import { useContext, useState } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 
 const Register = () => {
   const { handleRegister, setUser, manageProfile, user, handleGoogleLogin } =
     useContext(AuthContext);
   const [error, setError] = useState("");
+
+  const nav = useNavigate();
+
+  const { state } = useLocation();
+  const from = state ? state : "/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +36,7 @@ const Register = () => {
         manageProfile(name, photo).then(() => {
           console.log("Updated");
         });
+        nav(from);
       })
       .catch((err) => {
         setError(err.message);
@@ -41,6 +47,7 @@ const Register = () => {
     handleGoogleLogin()
       .then((result) => {
         setUser(result.user);
+        nav(from);
       })
       .catch((err) => {
         console.log(err);

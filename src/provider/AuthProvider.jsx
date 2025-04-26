@@ -16,33 +16,39 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ routes }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Sign Up
   const handleRegister = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   //   Login
 
   const handleLogin = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // SignOut
 
   const handleLogOut = () => {
+    setLoading(true);
     setUser(null);
     return signOut();
   };
 
   // Google Login
   const handleGoogleLogin = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   //   Manage Profile
 
   const manageProfile = (name, photo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -54,6 +60,7 @@ const AuthProvider = ({ routes }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
 
     return () => {
@@ -69,6 +76,7 @@ const AuthProvider = ({ routes }) => {
     user,
     setUser,
     manageProfile,
+    loading,
   };
 
   return <AuthContext.Provider value={authInfo}>{routes}</AuthContext.Provider>;

@@ -1,14 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { addAppointments } from "../utils/localStorage";
+import AuthContext from "../contexts/AuthContext";
 
 const Details = () => {
+  const { user } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+
+  const nav = useNavigate();
 
   const treatmentData = useLoaderData() || {};
   const [showModal, setShowModal] = useState(false);
@@ -40,9 +46,24 @@ const Details = () => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log("Appointment Data:", data);
+    const { firstName, lastName, phone, address, appointmentDate, email } =
+      data;
+
+    const info = {
+      firstName,
+      lastName,
+      phone,
+      address,
+      appointmentDate,
+      email: user.email,
+      treatment,
+    };
+
+    addAppointments(info);
+
     reset();
     setShowModal(false);
+    nav("/myAppointments");
   };
 
   return (
@@ -158,6 +179,7 @@ const Details = () => {
                 <InputField
                   label="Email"
                   name="email"
+                  defaultValue={user?.email}
                   type="email"
                   register={register}
                   errors={errors}
@@ -198,7 +220,7 @@ const Details = () => {
   );
 };
 
-const InputField = ({ label, name, type = "text", register, errors }) => (
+const InputField = ({ label, name, type = "text", register, errors , defaultValue}) => (
   <div>
     <label htmlFor={name} className="block text-sm font-semibold mb-1">
       {label}
@@ -206,6 +228,7 @@ const InputField = ({ label, name, type = "text", register, errors }) => (
     <input
       id={name}
       type={type}
+      defaultValue={defaultValue}
       placeholder={`Enter ${label}`}
       {...register(name, { required: `${label} is required` })}
       className="w-full px-4 py-3 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gray-300"

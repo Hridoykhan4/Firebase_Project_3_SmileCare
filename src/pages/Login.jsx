@@ -1,22 +1,28 @@
 import { useContext, useState } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { handleGoogleLogin, setUser, handleLogin } = useContext(AuthContext);
-  const [error, setError] = useState("")   
+  const [error, setError] = useState("");
+
+  const { state } = useLocation();
+
+  const nav = useNavigate();
+
+  const from = state ? state : "/";
 
   const handleGoogleSignIn = () => {
     handleGoogleLogin()
       .then((result) => {
         setUser(result.user);
+        nav(from);
       })
       .catch((err) => {
         setError(err);
       });
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +33,8 @@ const Login = () => {
 
     handleLogin(email, password)
       .then((result) => {
-        console.log(result.user);
+        setUser(result.user);
+        nav(from);
       })
       .catch((err) => setError(err.code));
   };
@@ -77,7 +84,6 @@ const Login = () => {
         </form>
 
         <p className="text-red-500 mt-4">{error}</p>
-
 
         <p className="text-center text-sm mt-4">
           Don't have an account?{" "}
