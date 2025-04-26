@@ -11,6 +11,7 @@ import AuthContext from "../contexts/AuthContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import app from "../Firebase/firebase.init";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -36,7 +37,8 @@ const AuthProvider = ({ routes }) => {
   const handleLogOut = () => {
     setLoading(true);
     setUser(null);
-    return signOut();
+    notify("Log Out Successfully")
+    return signOut(auth);
   };
 
   // Google Login
@@ -52,6 +54,16 @@ const AuthProvider = ({ routes }) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
+    });
+  };
+
+
+   // Notify alert
+   const notify = (title) => {
+    Swal.fire({
+      title: `${title}`,
+      icon: "success",
+      draggable: true,
     });
   };
 
@@ -77,6 +89,7 @@ const AuthProvider = ({ routes }) => {
     setUser,
     manageProfile,
     loading,
+    notify
   };
 
   return <AuthContext.Provider value={authInfo}>{routes}</AuthContext.Provider>;

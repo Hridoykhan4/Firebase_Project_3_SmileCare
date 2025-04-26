@@ -6,7 +6,6 @@ import AuthContext from "../contexts/AuthContext";
 
 const Details = () => {
   const { user } = useContext(AuthContext);
-
   const {
     register,
     handleSubmit,
@@ -46,8 +45,7 @@ const Details = () => {
   }, []);
 
   const onSubmit = (data) => {
-    const { firstName, lastName, phone, address, appointmentDate, email } =
-      data;
+    const { firstName, lastName, phone, address, appointmentDate } = data;
 
     const info = {
       firstName,
@@ -55,9 +53,11 @@ const Details = () => {
       phone,
       address,
       appointmentDate,
-      email: user.email,
+      email: user?.email || "",
       treatment,
     };
+
+ 
 
     addAppointments(info);
 
@@ -156,11 +156,11 @@ const Details = () => {
         {showModal && (
           <div
             className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50"
-            onClick={(e) => {
+            /*  onClick={(e) => {
               if (e.target.classList.contains("fixed")) {
                 setShowModal(false);
               }
-            }}
+            }} */
           >
             <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-md">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -179,7 +179,7 @@ const Details = () => {
                 <InputField
                   label="Email"
                   name="email"
-                  defaultValue={user?.email}
+                  value={user?.email}
                   type="email"
                   register={register}
                   errors={errors}
@@ -220,7 +220,14 @@ const Details = () => {
   );
 };
 
-const InputField = ({ label, name, type = "text", register, errors , defaultValue}) => (
+const InputField = ({
+  label,
+  name,
+  type = "text",
+  register,
+  errors,
+  value,
+}) => (
   <div>
     <label htmlFor={name} className="block text-sm font-semibold mb-1">
       {label}
@@ -228,7 +235,7 @@ const InputField = ({ label, name, type = "text", register, errors , defaultValu
     <input
       id={name}
       type={type}
-      defaultValue={defaultValue}
+      value={value}
       placeholder={`Enter ${label}`}
       {...register(name, { required: `${label} is required` })}
       className="w-full px-4 py-3 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gray-300"

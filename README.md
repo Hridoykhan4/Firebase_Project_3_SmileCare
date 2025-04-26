@@ -1,12 +1,30 @@
-# React + Vite
+# 🌟 SmileCare
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **SmileCare** — a modern, responsive web platform focused on bringing brighter smiles and better care solutions to everyone.
 
-Currently, two official plugins are available:
+🔗 **Live Website**: [smilecarenew.netlify.app](https://smilecarenew.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- 🦷 Beautiful, Clean, and Professional UI
+- ⚡️ Fully Responsive across all devices
+- 🔥 Built with **React.js**, **Tailwind CSS**, and **Firebase**
+- 🔒 Secure Authentication (Google Sign-In)
+- 🌐 Deployed with **Netlify** for lightning-fast loading
+- 📋 Future-ready codebase for easy scalability
+
+---
+
+## 🛠️ Technologies Used
+
+- **React.js**
+- **Tailwind CSS**
+- **Firebase Authentication**
+- **Firebase Hosting (Backup)**
+- **Netlify** (Primary Deployment)
+
+---
+

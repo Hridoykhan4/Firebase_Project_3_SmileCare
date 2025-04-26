@@ -4,7 +4,8 @@ import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { handleGoogleLogin, setUser, handleLogin } = useContext(AuthContext);
+  const { handleGoogleLogin, setUser, handleLogin, notify } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
 
   const { state } = useLocation();
@@ -18,6 +19,7 @@ const Login = () => {
       .then((result) => {
         setUser(result.user);
         nav(from);
+        notify("Google SignIn Successful")
       })
       .catch((err) => {
         setError(err);
@@ -34,6 +36,7 @@ const Login = () => {
     handleLogin(email, password)
       .then((result) => {
         setUser(result.user);
+        notify("Login Successful");
         nav(from);
       })
       .catch((err) => setError(err.code));

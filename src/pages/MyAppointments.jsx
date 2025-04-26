@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { getAppointmentsData } from "../utils/localStorage";
-import { Link } from "react-router-dom";
 
 const MyAppointments = () => {
   const { user } = useContext(AuthContext);
@@ -38,12 +38,16 @@ const MyAppointments = () => {
               key={i}
               className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition"
             >
-              <h3 className="text-xl font-bold mb-2 text-sky-700">{visit?.treatment}</h3>
+              <h3 className="text-xl font-bold mb-2 text-sky-700">
+                {visit?.treatment}
+              </h3>
               <p className="text-gray-700 mb-1">
-                <span className="font-semibold">First Name:</span> {visit?.firstName}
+                <span className="font-semibold">First Name:</span>{" "}
+                {visit?.firstName}
               </p>
               <p className="text-gray-700 mb-1">
-                <span className="font-semibold">Last Name:</span> {visit?.lastName}
+                <span className="font-semibold">Last Name:</span>{" "}
+                {visit?.lastName}
               </p>
               <p className="text-gray-700 mb-1">
                 <span className="font-semibold">Phone:</span> {visit?.phone}
@@ -52,7 +56,8 @@ const MyAppointments = () => {
                 <span className="font-semibold">Email:</span> {visit?.email}
               </p>
               <p className="text-gray-700 mb-1">
-                <span className="font-semibold">Appointment Date:</span> {visit?.appointmentDate}
+                <span className="font-semibold">Appointment Date:</span>{" "}
+                {visit?.appointmentDate}
               </p>
               <p className="text-gray-700">
                 <span className="font-semibold">Address:</span> {visit?.address}

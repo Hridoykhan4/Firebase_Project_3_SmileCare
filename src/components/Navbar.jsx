@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, handleLogOut } = useContext(AuthContext);
 
   const links = (
     <>
@@ -100,7 +100,10 @@ const Navbar = () => {
       <div className="navbar-end space-x-3">
         {user ? (
           <div className="flex items-center space-x-3">
-            <button className="btn btn-outline btn-primary rounded-full">
+            <button
+              onClick={handleLogOut}
+              className="btn btn-outline btn-primary rounded-full"
+            >
               Logout
             </button>
             <details className="dropdown dropdown-end">
@@ -114,7 +117,7 @@ const Navbar = () => {
               </summary>
               <ul className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52 space-y-1">
                 <li>
-                  <a>{user && user?.email}</a>
+                  <a>{user && user?.email || "Email Not Found"}</a>
                 </li>
                 <li>
                   <NavLink to="/profile">Profile</NavLink>

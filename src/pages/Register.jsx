@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 
 const Register = () => {
-  const { handleRegister, setUser, manageProfile, user, handleGoogleLogin } =
+  const { handleRegister, setUser, manageProfile, handleGoogleLogin, notify } =
     useContext(AuthContext);
   const [error, setError] = useState("");
 
@@ -28,13 +28,11 @@ const Register = () => {
 
     setError("");
 
-    console.log(user);
-
     handleRegister(email, password)
       .then((result) => {
         setUser(result.user);
         manageProfile(name, photo).then(() => {
-          console.log("Updated");
+     
         });
         nav(from);
       })
@@ -43,14 +41,17 @@ const Register = () => {
       });
   };
 
+ 
+
   const handleGoogleSignIn = () => {
     handleGoogleLogin()
       .then((result) => {
         setUser(result.user);
+        notify("Registration is Successful");
         nav(from);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+       
       });
   };
 
