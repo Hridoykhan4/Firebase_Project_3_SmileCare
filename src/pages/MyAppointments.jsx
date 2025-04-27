@@ -7,6 +7,14 @@ const MyAppointments = () => {
   const { user } = useContext(AuthContext);
   const [myVisits, setMyVisits] = useState([]);
 
+  const handleCancelAppointment = (visit) => {
+    const remaining = myVisits.filter(
+      (visited) => visited.phone !== visit.phone
+    );
+    setMyVisits(remaining);
+    localStorage.setItem("appointments", JSON.stringify(remaining));
+  };
+
   useEffect(() => {
     const getData = getAppointmentsData();
     if (getData) {
@@ -62,6 +70,13 @@ const MyAppointments = () => {
               <p className="text-gray-700">
                 <span className="font-semibold">Address:</span> {visit?.address}
               </p>
+
+              <button
+                onClick={() => handleCancelAppointment(visit)}
+                className="btn btn-warning mt-3"
+              >
+                Cancel Appointment
+              </button>
             </div>
           ))}
         </div>
